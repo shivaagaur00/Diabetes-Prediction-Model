@@ -56,13 +56,45 @@ st.markdown("""
         .result-negative {
             background-color: #27ae60;
         }
+        .stRadio div {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #34495e;
+            margin-bottom: 10px;
+        }
+        .stRadio div label {
+            cursor: pointer;
+            border: 2px solid #bdc3c7;
+            border-radius: 5px;
+            padding: 10px 15px;
+            display: inline-block;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        .stRadio div label:hover {
+            background-color: #ecf0f1;
+            border-color: #3498db;
+        }
+        .stRadio div label input:checked + div {
+            background-color: #3498db;
+            color: white;
+            border-color: #2980b9;
+        }
     </style>
 """, unsafe_allow_html=True)
 
 st.markdown("<div class='main-header'>Diabetes Prediction App</div>", unsafe_allow_html=True)
 st.markdown("<div class='sub-header'>Fill in the details below to check for diabetes risk.</div>", unsafe_allow_html=True)
 
-model_choice = st.sidebar.selectbox('Choose Prediction Model:', ['Logistic Regression', 'Random Forest', 'Gaussian Naive Bayes'])
+model_choice = st.sidebar.radio(
+    "Choose Prediction Model:",
+    options=["Logistic Regression", "Random Forest", "Gaussian Naive Bayes"],
+    help="""
+    - Logistic Regression: A linear model best for simpler datasets.
+    - Random Forest: An ensemble model, ideal for complex patterns.
+    - Gaussian Naive Bayes: Probabilistic model assuming feature independence.
+    """
+)
 
 with st.form("prediction_form"):
     col1, col2 = st.columns(2)
